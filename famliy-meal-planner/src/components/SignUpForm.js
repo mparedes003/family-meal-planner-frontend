@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../store/actions';
 
@@ -81,6 +82,9 @@ class SignUpForm extends React.Component {
                 <button className='signup-btn' type='submit'>
                   Sign Up
                 </button>
+                <p>
+                  Already a member? Please <Link to='/login'>Sign In</Link>
+                </p>
               </form>
             </div>
           )}
