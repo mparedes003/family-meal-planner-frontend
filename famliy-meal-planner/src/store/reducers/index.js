@@ -1,8 +1,16 @@
-import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../actions';
+import {
+  SIGN_UP_START,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+} from '../actions';
 
 const initialState = {
   error: null,
   signingUp: false,
+  logginIn: false,
   success: false,
 };
 
@@ -27,6 +35,27 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         signingUp: null,
+        success: false,
+      };
+    case LOGIN_START:
+      return {
+        ...state,
+        error: null,
+        loggingIn: true,
+        success: false,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        loggingIn: false,
+        success: true,
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loggingIn: false,
         success: false,
       };
     default:
