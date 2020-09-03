@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import UserDashboard from './components/UserDashboard';
 import RecipeCard from './components/RecipeCard';
+import NavBar from './components/NavBar';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
       <div className='App'>
         <Router>
           <div>
+            <NavBar />
             <Route exact path='/' component={LoginForm} />
             <Route path='/register' component={SignUpForm} />
             <Route path='/dashboard' component={UserDashboard} />
