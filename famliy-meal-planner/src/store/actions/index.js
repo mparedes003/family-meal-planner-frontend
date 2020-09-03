@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import axiosAuthHelper from '../../util/axiosAuthHelper';
 
 // ACTION TYPES
 // one for fetching, one for fetched and one for errors
@@ -52,3 +53,58 @@ export const logIn = (credentials, history) => (dispatch) => {
       return false;
     });
 };
+
+// Get All Recipes Actions
+export const FETCH_TITLES_START = 'FETCH_TITLES_START';
+export const FETCH_TITLES_SUCCESS = 'FETCH_TITLES_SUCCESS';
+export const FETCH_TITLES_FAILURE = 'FETCH_TITLES_FAILURE';
+
+export const getAllRecipes = (recipeID) => (dispatch) => {
+  dispatch({ type: FETCH_TITLES_START });
+  // axiosWithAuth()
+  // axiosAuthHelper()
+  axios
+    .get(`http://localhost:9999/recipes`)
+    .then((res) => {
+      dispatch({ type: FETCH_TITLES_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: FETCH_TITLES_FAILURE, payload: err });
+    });
+};
+
+// Get a Recipe by id Actions
+export const FETCH_RECIPE_START = 'FETCH_RECIPE_START';
+export const FETCH_RECIPE_SUCCESS = 'FETCH_RECIPE_SUCCESS';
+export const FETCH_RECIPE_FAILURE = 'FETCH_RECIPE_FAILURE';
+
+export const getRecipe = (id) => {
+  return (dispatch) => {
+    // axiosAuthHelper()
+    axios
+      .get(`http://localhost:9999/recipes/${id}`)
+      .then((res) => {
+        dispatch({
+          type: FETCH_RECIPE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({ type: FETCH_RECIPE_FAILURE, payload: err });
+      });
+  };
+};
+
+// export const getRecipe = (id) => (dispatch) => {
+//   dispatch({ type: FETCH_RECIPE_START });
+
+//   // axiosAuthHelper()
+//   axios
+//     .get(`http://localhost:9999/recipes/${id}`)
+//     .then((res) => {
+//       dispatch({ type: FETCH_RECIPE_SUCCESS, payload: res.data.recipe });
+//     })
+//     .catch((err) => {
+//       dispatch({ type: FETCH_RECIPE_FAILURE, payload: err });
+//     });
+// };
