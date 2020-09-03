@@ -21,6 +21,26 @@ class RecipeCard extends React.Component {
         {console.log('this', this.props)}
         <h1>Recipe Card</h1>
         <h2>{this.props.recipe.title}</h2>
+        <h3>Ingredients</h3>
+        {this.props.recipe.ingredients &&
+          this.props.recipe.ingredients.map((ingredient) => (
+            <div>
+              <li>{ingredient.quantity}</li>
+              <li>{ingredient.measurement}</li>
+              <li>{ingredient.name}</li>
+              <br />
+            </div>
+          ))}
+
+        <h3>Instructions</h3>
+        {this.props.recipe.instructions &&
+          this.props.recipe.instructions.map((instruction) => (
+            <div>
+              <li>Step {instruction.step_number}</li>
+              <li>{instruction.description}</li>
+              <br />
+            </div>
+          ))}
       </div>
     );
   }
