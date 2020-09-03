@@ -4,6 +4,8 @@ import './App.css';
 
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
+import UserDashboard from './components/UserDashboard';
+import RecipeCard from './components/RecipeCard';
 
 class App extends Component {
   render() {
@@ -11,8 +13,10 @@ class App extends Component {
       <div className='App'>
         <Router>
           <div>
-            <Route path='/login' component={LoginForm} />
-            <Route path='/sign-up' component={SignUpForm} />
+            <Route exact path='/' component={LoginForm} />
+            <Route path='/register' component={SignUpForm} />
+            <Route path='/dashboard' component={UserDashboard} />
+            <Route path='/recipes/:id' component={RecipeCard} />
           </div>
         </Router>
       </div>

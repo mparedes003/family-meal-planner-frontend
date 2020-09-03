@@ -83,7 +83,7 @@ class SignUpForm extends React.Component {
                   Sign Up
                 </button>
                 <p>
-                  Already a member? Please <Link to='/login'>Sign In</Link>
+                  Already a member? Please <Link to='/'>Sign In</Link>
                 </p>
               </form>
             </div>
