@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
 
   render() {
     if (localStorage.getItem('token')) {
-      return <Redirect to='/' />;
+      return <Redirect to='/dashboard' />;
     }
 
     return (
@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
             />
             <button type='submit'>Login</button>
             <p>
-              Not a member? Please <Link to='/sign-up'>Register Here</Link>
+              Not a member? Please <Link to='/register'>Register Here</Link>
             </p>
           </form>
         )}
