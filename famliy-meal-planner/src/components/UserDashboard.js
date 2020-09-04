@@ -12,8 +12,11 @@ class UserDashboard extends React.Component {
       <div>
         <h1>Welcome to Your Dashboard</h1>
         {console.log('this', this.props)}
+        {/* maps the existing recipes of a user and 
+        lists them one after the other */}
         {this.props.currentRecipes.map((title) => {
           return (
+            // links to display recipe card
             <div className='recipe-card'>
               <Link to={`/recipes/${title.id}`} key={title.id}>
                 <h2>{title.title}</h2>
