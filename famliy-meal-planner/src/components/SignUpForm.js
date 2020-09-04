@@ -11,6 +11,7 @@ class SignUpForm extends React.Component {
     passwordMatch: true,
   };
 
+  // event handler to handle any changes
   changeHandler = (event) => {
     event.persist();
     this.setState({
@@ -18,6 +19,7 @@ class SignUpForm extends React.Component {
     });
   };
 
+  // registers a new member
   signUp = (event) => {
     event.preventDefault();
     if (this.state.password1 === this.state.password2) {
@@ -73,6 +75,7 @@ class SignUpForm extends React.Component {
                   onChange={this.changeHandler}
                   value={this.input}
                 />
+                {/* if the passwords entered do not match, let the user know. */}
                 {!this.state.passwordMatch ? (
                   <p>Oops! Your passwords don't match</p>
                 ) : (
@@ -82,6 +85,7 @@ class SignUpForm extends React.Component {
                 <button className='signup-btn' type='submit'>
                   Sign Up
                 </button>
+                {/* Log in if already an existing member */}
                 <p>
                   Already a member? Please <Link to='/'>Sign In</Link>
                 </p>
