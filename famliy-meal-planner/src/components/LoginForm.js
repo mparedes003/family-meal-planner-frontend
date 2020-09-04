@@ -11,6 +11,7 @@ class LoginForm extends React.Component {
     },
   };
 
+  // event handler to handle any changes
   changeHandler = (event) => {
     this.setState({
       credentials: {
@@ -20,6 +21,7 @@ class LoginForm extends React.Component {
     });
   };
 
+  // Logs in a new member
   logIn = (event) => {
     event.preventDefault();
     this.props.logIn(this.state.credentials, this.props.history);
@@ -32,7 +34,9 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    // if user is logged in
     if (localStorage.getItem('token')) {
+      // redirect user to their dashboard
       return <Redirect to='/dashboard' />;
     }
 
@@ -60,6 +64,7 @@ class LoginForm extends React.Component {
               value={this.input}
             />
             <button type='submit'>Login</button>
+            {/* Sign up if not already an existing member */}
             <p>
               Not a member? Please <Link to='/register'>Register Here</Link>
             </p>
