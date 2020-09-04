@@ -20,8 +20,12 @@ class RecipeCard extends React.Component {
       <div className='recipe-view-wrapper'>
         {console.log('this', this.props)}
         <h1>Recipe Card</h1>
+        {/* displays title of the recipe */}
         <h2>{this.props.recipe.title}</h2>
         <h3>Ingredients</h3>
+        {/* Ingredients is a nested array within a recipe object.
+        Use a mapping function to pull each one out and 
+        list them one after the other. */}
         {this.props.recipe.ingredients &&
           this.props.recipe.ingredients.map((ingredient) => (
             <div>
@@ -33,6 +37,9 @@ class RecipeCard extends React.Component {
           ))}
 
         <h3>Instructions</h3>
+        {/* Instructions is a nested array within a recipe object.
+        Use a mapping function to pull each one out and 
+        list them one after the other. */}
         {this.props.recipe.instructions &&
           this.props.recipe.instructions.map((instruction) => (
             <div>
