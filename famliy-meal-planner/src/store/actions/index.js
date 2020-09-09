@@ -95,16 +95,31 @@ export const getRecipe = (id) => {
   };
 };
 
-// export const getRecipe = (id) => (dispatch) => {
-//   dispatch({ type: FETCH_RECIPE_START });
+// Add new recipe actions
+export const ADD_RECIPE_START = 'ADD_RECIPE_START';
+export const ADD_RECIPE_SUCCESS = 'ADD_RECIPE_SUCCESS';
+export const ADD_RECIPE_FAILURE = 'ADD_RECIPE_FAILURE';
 
-//   // axiosAuthHelper()
-//   axios
-//     .get(`http://localhost:9999/recipes/${id}`)
-//     .then((res) => {
-//       dispatch({ type: FETCH_RECIPE_SUCCESS, payload: res.data.recipe });
-//     })
-//     .catch((err) => {
-//       dispatch({ type: FETCH_RECIPE_FAILURE, payload: err });
-//     });
-// };
+export const addRecipe = (newRecipe, history) => (dispatch) => {
+  dispatch({ type: ADD_RECIPE_START });
+
+  const token = localStorage.getItem('token');
+
+  axios
+    .create({
+      headers: {
+        Authorization: token,
+      },
+    })
+    .post('http://localhost:9999/recipes', newRecipe)
+    .then((res) => {
+      console.log('data', res.data);
+      dispatch({
+        type: ADD_RECIPE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({ type: ADD_RECIPE_FAILURE, payload: err });
+    });
+};
