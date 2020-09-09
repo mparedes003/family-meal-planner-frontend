@@ -11,6 +11,9 @@ import {
   FETCH_RECIPE_START,
   FETCH_RECIPE_SUCCESS,
   FETCH_RECIPE_FAILURE,
+  ADD_RECIPE_START,
+  ADD_RECIPE_SUCCESS,
+  ADD_RECIPE_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -111,6 +114,40 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         fetchingRecipe: false,
+        success: false,
+      };
+    case ADD_RECIPE_START:
+      return {
+        ...state,
+        addingRecipe: true,
+        recipes: action.payload,
+        error: false,
+        success: false,
+      };
+    case ADD_RECIPE_SUCCESS:
+      // return {
+      //   ...state,
+      //   recipe: {
+      //     ...state.recipe,
+      //     ingredients: [...state.recipe.ingredients, action.payload],
+      //     instructions: [...state.recipe.instructions, action.payload],
+      //   },
+      //   error: null,
+      //   addingRecipe: false,
+      //   succes: true,
+      // };
+      return {
+        ...state,
+        error: null,
+        addingRecipe: false,
+        recipes: action.payload,
+        success: true,
+      };
+    case ADD_RECIPE_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        addingRecipe: false,
         success: false,
       };
     default:
