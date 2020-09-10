@@ -7,7 +7,7 @@ import SignUpForm from './components/SignUpForm';
 import UserDashboard from './components/UserDashboard';
 import RecipeCard from './components/RecipeCard';
 import NavBar from './components/NavBar';
-import RecipeForm from './components/RecipeForm';
+import RecipeForm2 from './components/RecipeForm2';
 
 class App extends Component {
   render() {
@@ -20,7 +20,7 @@ class App extends Component {
             <Route path='/register' component={SignUpForm} />
             <Route path='/dashboard' component={UserDashboard} />
             <Route path='/recipes/:id' component={RecipeCard} />
-            <Route path='/add/recipe' component={RecipeForm} />
+            <Route path='/add/recipe' component={RecipeForm2} />
           </div>
         </Router>
       </div>
