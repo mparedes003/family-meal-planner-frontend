@@ -54,8 +54,8 @@ class RecipeCard extends React.Component {
 }
 
 const mapDispatchToProps = (state) => ({
-  recipe: state.recipe,
-  fetchingRecipe: state.fetchingRecipe,
+  recipe: state.rootReducers.recipe,
+  fetchingRecipe: state.rootReducers.fetchingRecipe,
 });
 
 export default connect(mapDispatchToProps, {
