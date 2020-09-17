@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = ({ history }) => {
+const NavBar = () => {
   // logs out a user by removing the token from localStorage
   const logout = () => {
     localStorage.removeItem('token');
@@ -10,8 +10,9 @@ const NavBar = ({ history }) => {
   return (
     <div>
       <NavLink to='/dashboard'>Your Recipies</NavLink>{' '}
+      <NavLink to='/recipe/add'>Add Recipe</NavLink>
       <NavLink to='/'>Log in</NavLink>
-      <p onClick={logout}>Log out</p>
+      <u onClick={logout}>Log out</u>
     </div>
   );
 };

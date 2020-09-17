@@ -10,7 +10,7 @@ class UserDashboard extends React.Component {
   render() {
     return (
       <div>
-        <h1>Welcome to Your Dashboard</h1>
+        <h2>Welcome to Your Dashboard</h2>
         {console.log('this', this.props)}
         {/* maps the existing recipes of a user and 
         lists them one after the other */}
@@ -29,11 +29,14 @@ class UserDashboard extends React.Component {
   }
 }
 
-const mapDispatchToProps = (state) => ({
-  titles: state.titles.recipes,
-  fetchingTitles: state.fetchingTitles,
-  currentRecipes: state.currentRecipes,
-});
+const mapDispatchToProps = (state) => {
+  const { titles, fetchingTitles, currentRecipes } = state.rootReducers;
+  return {
+    titles: titles.recipes,
+    fetchingTitles,
+    currentRecipes,
+  };
+};
 
 export default connect(mapDispatchToProps, {
   getAllRecipes,

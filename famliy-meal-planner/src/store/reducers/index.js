@@ -26,9 +26,10 @@ const initialState = {
   fetchingTitles: false,
   currentRecipes: [],
   fetchingRecipe: false,
+  addingRecipe: false,
 };
 
-const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SIGN_UP_START:
       return {
@@ -125,17 +126,6 @@ const reducer = (state = initialState, action) => {
         success: false,
       };
     case ADD_RECIPE_SUCCESS:
-      // return {
-      //   ...state,
-      //   recipe: {
-      //     ...state.recipe,
-      //     ingredients: [...state.recipe.ingredients, action.payload],
-      //     instructions: [...state.recipe.instructions, action.payload],
-      //   },
-      //   error: null,
-      //   addingRecipe: false,
-      //   succes: true,
-      // };
       return {
         ...state,
         error: null,
@@ -154,5 +144,3 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default reducer;

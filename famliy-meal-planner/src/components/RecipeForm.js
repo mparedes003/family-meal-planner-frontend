@@ -1,118 +1,225 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { addRecipe } from '../store/actions';
+import React, { Component } from 'react';
+import { Field, FieldArray, reduxForm } from 'redux-form';
+import { renderField, renderIngredients, renderInstructions } from './fields';
 
-class RecipeForm extends React.Component {
-  state = {
-    title: '',
-    ingredients: [],
-    quantity: null,
-    measurement: '',
-    name: '',
-    instructions: [],
-    step_number: null,
-    description: '',
-  };
-
-  changeHandler = (event) => {
-    event.persist();
-    this.setState({
-      ...this.state,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  submitRecipeForm = (event) => {
-    event.preventDefault();
-    const newRecipe = {
-      title: this.state.title,
-      ingredients: [
-        {
-          quantity: +this.state.quantity,
-          measurement: this.state.measurement,
-          name: this.state.name,
-        },
-      ],
-      instructions: [
-        {
-          step_number: +this.state.step_number,
-          description: this.state.description,
-        },
-      ],
-    };
-    // console.log('newRecipe data', this.props.history);
-    console.log('newRecipe data', newRecipe);
-    this.props.addRecipe(newRecipe, this.props.history);
-  };
-
+class RecipeForm extends Component {
   render() {
+    const { handleSubmit, pristine, reset, submitting } = this.props;
+
     return (
       <div>
-        <h2>Add New Recipe</h2>
-        <form onSubmit={this.submitRecipeForm}>
-          <input
-            placeholder='title'
-            type='text'
-            required
+        <form onSubmit={handleSubmit}>
+          <h2>Add A Recipe</h2>
+          <Field
             name='title'
-            onChange={this.changeHandler}
-            value={this.state.title}
+            type='text'
+            component={renderField}
+            label='Recipe Title'
           />
-          <div>
-            <h3>Ingredients</h3>
-            <input
-              placeholder='quantity'
-              type='text'
-              required
-              name='quantity'
-              onChange={this.changeHandler}
-              value={this.state.quantity}
-            />
-            <input
-              placeholder='measurement'
-              type='text'
-              required
-              name='measurement'
-              onChange={this.changeHandler}
-              value={this.state.measurement}
-            />
-            <input
-              placeholder='Ingredient'
-              type='text'
-              required
-              name='name'
-              onChange={this.changeHandler}
-              value={this.state.name}
-            />
-          </div>
-          <div>
-            <h3>Instructions</h3>
-            <input
-              placeholder='step number'
-              type='text'
-              required
-              name='step_number'
-              onChange={this.changeHandler}
-              value={this.state.step_number}
-            />
-            <input
-              placeholder='description'
-              type='text'
-              required
-              name='description'
-              onChange={this.changeHandler}
-              value={this.state.description}
-            />
-          </div>
-          <button type='submit'>Add Recipe</button>
+          <FieldArray name='ingredients' component={renderIngredients} />
+          <FieldArray name='instructions' component={renderInstructions} />
+
+          <button type='submit' disabled={submitting}>
+            Submit
+          </button>
+          <button
+            type='button'
+            disabled={pristine || submitting}
+            onClick={reset}
+          >
+            Reset
+          </button>
         </form>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (state) => ({
-  addingRecipe: state.addingRecipe,
-});
+// RecipeForm3 = reduxForm({
+//   form: 'add-recipe',
+// })(RecipeForm3);
 
-export default connect(mapDispatchToProps, { addRecipe })(RecipeForm);
+// export default connect(
+//   null,
+//   mapDispatchToProps
+// )(RecipeForm3);
+
+export default reduxForm({
+  form: 'addRecipeForm3',
+  // validate,
+})(RecipeForm);
+
+// import React from 'react';
+// import { Field, FieldArray, reduxForm } from 'redux-form';
+// import validate from './validate';
+
+// const RecipeForm3 = (props) => {
+//   const {
+//     array: { push },
+//     handleSubmit,
+//     pristine,
+//     reset,
+//     submitting,
+//   } = props;
+//   // console.log('props', props);
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <div>
+//         <label>Recipe Title</label>
+//         <Field
+//           name='title'
+//           key='title'
+//           component={(title) => (
+//             <div>
+//               <input type='text' {...title} placeholder='Recipe Title' />
+//               {title.touched && title.error && <span>{title.error}</span>}
+//             </div>
+//           )}
+//         />
+//       </div>
+//       <FieldArray
+//         name='ingredients'
+//         component={(ingredients) => (
+//           <ul>
+//             <li>
+//               <button type='button' onClick={() => push('ingredients', {})}>
+//                 Add Ingredient
+//               </button>
+//             </li>
+//             {props.ingredients.map((ingredient, ingredientIndex) => (
+//               <li key={ingredientIndex}>
+//                 <button
+//                   type='button'
+//                   title='Remove Ingredient'
+//                   onClick={() => ingredients.remove(ingredientIndex)}
+//                 />
+//                 <h4>Ingredient #{ingredientIndex + 1}</h4>
+//                 <div>
+//                   <label>Quantity</label>
+//                   <Field
+//                     name={`${ingredient}.quantity`}
+//                     component={(quantity) => (
+//                       <div>
+//                         <input
+//                           type='text'
+//                           {...quantity}
+//                           placeholder='Quantity'
+//                         />
+//                         {quantity.touched && quantity.error && (
+//                           <span>{quantity.error}</span>
+//                         )}
+//                       </div>
+//                     )}
+//                   />
+//                 </div>
+//                 <div>
+//                   <label>Measurement</label>
+//                   <Field
+//                     name={`${ingredient}.measurement`}
+//                     component={(measurement) => (
+//                       <div>
+//                         <input
+//                           type='text'
+//                           {...measurement}
+//                           placeholder='Measurement'
+//                         />
+//                         {measurement.touched && measurement.error && (
+//                           <span>{measurement.error}</span>
+//                         )}
+//                       </div>
+//                     )}
+//                   />
+//                 </div>
+//                 <div>
+//                   <label>Ingredient</label>
+//                   <Field
+//                     name={`${ingredient}.name`}
+//                     component={(name) => (
+//                       <div>
+//                         <input type='text' {...name} placeholder='Ingredient' />
+//                         {name.touched && name.error && (
+//                           <span>{name.error}</span>
+//                         )}
+//                       </div>
+//                     )}
+//                   />
+//                 </div>
+//               </li>
+//             ))}
+//           </ul>
+//         )}
+//       />
+//       <FieldArray
+//         name='instructions'
+//         component={(instructions) => (
+//           <ul>
+//             <li>
+//               <button type='button' onClick={() => push('instructions', {})}>
+//                 Add Instruction
+//               </button>
+//             </li>
+//             {props.instructions.map((instruction, instructionIndex) => (
+//               <li key={instructionIndex}>
+//                 <button
+//                   type='button'
+//                   title='Remove Instruction'
+//                   onClick={() => instructions.remove(instructionIndex)}
+//                 />
+//                 <h4>Instruction #{instructionIndex + 1}</h4>
+//                 <div>
+//                   <label>Step Number</label>
+//                   <Field
+//                     name={`${instruction}.step_number`}
+//                     component={(step_number) => (
+//                       <div>
+//                         <input
+//                           type='text'
+//                           {...step_number}
+//                           placeholder='Step Number'
+//                         />
+//                         {step_number.touched && step_number.error && (
+//                           <span>{step_number.error}</span>
+//                         )}
+//                       </div>
+//                     )}
+//                   />
+//                 </div>
+//                 <div>
+//                   <label>Description</label>
+//                   <Field
+//                     name={`${instruction}.description`}
+//                     component={(description) => (
+//                       <div>
+//                         <input
+//                           type='text'
+//                           {...description}
+//                           placeholder='Description'
+//                         />
+//                         {description.touched && description.error && (
+//                           <span>{description.error}</span>
+//                         )}
+//                       </div>
+//                     )}
+//                   />
+//                 </div>
+//               </li>
+//             ))}
+//           </ul>
+//         )}
+//       />
+//       <div>
+//         <button type='submit' disabled={submitting}>
+//           Submit
+//         </button>
+//         <button type='button' disabled={pristine || submitting} onClick={reset}>
+//           Clear Values
+//         </button>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default reduxForm({
+//   form: 'fieldArrays', // a unique identifier for this form
+//   validate,
+// })(RecipeForm3);

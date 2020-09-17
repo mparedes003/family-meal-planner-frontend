@@ -116,7 +116,9 @@ export const addRecipe = (newRecipe, history) => (dispatch) => {
       console.log('data', res.data);
       dispatch({
         type: ADD_RECIPE_SUCCESS,
+        // form, // react-final-form
         payload: res.data,
+        // payload: state,
       });
     })
     .catch((err) => {
