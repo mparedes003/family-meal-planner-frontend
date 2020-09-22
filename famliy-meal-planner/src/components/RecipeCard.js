@@ -40,37 +40,52 @@ class RecipeCard extends React.Component {
 
   render() {
     return (
-      <div className='recipe-view-wrapper'>
-        {console.log('this', this.props)}
-        <h1>Recipe Card</h1>
-        {/* displays title of the recipe */}
-        <h2>{this.props.recipe.title}</h2>
-        <h3>Ingredients</h3>
-        {/* Ingredients is a nested array within a recipe object.
+      <div className='main-conatiner-recipe'>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          className='modal'
+          overlayClassName='overlay'
+        >
+          <h3>Are you sure you want to delete this recipe?</h3>
+          <div className='modal-buttons'>
+            <button onClick={this.handleDelete}>Delete</button>
+            <button onClick={this.closeModal}>No</button>
+          </div>
+        </Modal>
+        <div className='recipe-body'>
+          {console.log('this', this.props)}
+          <h1>Recipe Card</h1>
+          {/* displays title of the recipe */}
+          <h2>{this.props.recipe.title}</h2>
+          <h3>Ingredients</h3>
+          {/* Ingredients is a nested array within a recipe object.
         Use a mapping function to pull each one out and 
         list them one after the other. */}
-        {this.props.recipe.ingredients &&
-          this.props.recipe.ingredients.map((ingredient) => (
-            <div>
-              <li>{ingredient.quantity}</li>
-              <li>{ingredient.measurement}</li>
-              <li>{ingredient.name}</li>
-              <br />
-            </div>
-          ))}
+          {this.props.recipe.ingredients &&
+            this.props.recipe.ingredients.map((ingredient) => (
+              <div>
+                <li>{ingredient.quantity}</li>
+                <li>{ingredient.measurement}</li>
+                <li>{ingredient.name}</li>
+                <br />
+              </div>
+            ))}
 
-        <h3>Instructions</h3>
-        {/* Instructions is a nested array within a recipe object.
+          <h3>Instructions</h3>
+          {/* Instructions is a nested array within a recipe object.
         Use a mapping function to pull each one out and 
         list them one after the other. */}
-        {this.props.recipe.instructions &&
-          this.props.recipe.instructions.map((instruction) => (
-            <div>
-              <li>Step {instruction.step_number}</li>
-              <li>{instruction.description}</li>
-              <br />
-            </div>
-          ))}
+          {this.props.recipe.instructions &&
+            this.props.recipe.instructions.map((instruction) => (
+              <div>
+                <li>Step {instruction.step_number}</li>
+                <li>{instruction.description}</li>
+                <br />
+              </div>
+            ))}
+        </div>
       </div>
     );
   }
