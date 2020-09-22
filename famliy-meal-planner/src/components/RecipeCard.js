@@ -54,6 +54,9 @@ class RecipeCard extends React.Component {
             <button onClick={this.closeModal}>No</button>
           </div>
         </Modal>
+        <div className='actions-container'>
+          <button onClick={this.openModal}>delete</button>
+        </div>
         <div className='recipe-body'>
           {console.log('this', this.props)}
           <h1>Recipe Card</h1>
