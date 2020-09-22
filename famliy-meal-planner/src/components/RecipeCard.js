@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getRecipe } from '../store/actions';
+import { getRecipe, deleteRecipe } from '../store/actions';
+import Modal from 'react-modal';
 
 class RecipeCard extends React.Component {
   // sets recipe id to this.id
@@ -60,4 +61,5 @@ const mapDispatchToProps = (state) => ({
 
 export default connect(mapDispatchToProps, {
   getRecipe,
+  deleteRecipe,
 })(RecipeCard);
