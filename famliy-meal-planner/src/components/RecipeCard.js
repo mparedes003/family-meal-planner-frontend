@@ -4,6 +4,10 @@ import { getRecipe, deleteRecipe } from '../store/actions';
 import Modal from 'react-modal';
 
 class RecipeCard extends React.Component {
+  state = {
+    modalIsOpen: false,
+    id: '',
+  };
   // sets recipe id to this.id
   get id() {
     console.log('ID', this.props.match.params.id);
@@ -15,6 +19,12 @@ class RecipeCard extends React.Component {
   componentDidMount() {
     this.props.getRecipe(this.id);
   }
+
+  // activates delete modal
+  openModal = (event) => {
+    event.preventDefault();
+    this.setState({ modalIsOpen: true });
+  };
 
   render() {
     return (
