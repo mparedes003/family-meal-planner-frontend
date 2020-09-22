@@ -60,7 +60,10 @@ class App extends Component {
         <Route exact path='/' component={LoginForm} />
         <Route path='/register' component={SignUpForm} />
         <Route path='/dashboard' component={UserDashboard} />
-        <Route path='/recipes/:id' component={RecipeCard} />
+        <Route
+          path='/recipes/:id'
+          render={(props) => <RecipeCard {...props} />}
+        />
         <Route
           path='/recipe/add'
           render={(props) => <RecipeForm onSubmit={this.handleSubmit} />}

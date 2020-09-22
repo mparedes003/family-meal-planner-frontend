@@ -125,3 +125,17 @@ export const addRecipe = (newRecipe, history) => (dispatch) => {
       dispatch({ type: ADD_RECIPE_FAILURE, payload: err });
     });
 };
+
+// Delete a recipe actions
+export const DELETE_RECIPE_FAILURE = 'DELETE_RECIPE_FAILURE';
+
+export const deleteRecipe = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:9999/recipes/${id}`)
+      .then(() => deleteRecipe()(dispatch))
+      .catch((error) => {
+        dispatch({ type: 'DELETE_RECIPE_FAILURE', payload: error });
+      });
+  };
+};
