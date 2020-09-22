@@ -127,7 +127,7 @@ export const addRecipe = (newRecipe, history) => (dispatch) => {
 };
 
 // Delete a recipe actions
-export const ERROR = 'ERROR';
+export const DELETE_RECIPE_FAILURE = 'DELETE_RECIPE_FAILURE';
 
 export const deleteRecipe = (id) => {
   return (dispatch) => {
@@ -135,7 +135,7 @@ export const deleteRecipe = (id) => {
       .delete(`http://localhost:9999/recipes/${id}`)
       .then(() => deleteRecipe()(dispatch))
       .catch((error) => {
-        dispatch({ type: 'ERROR', payload: error });
+        dispatch({ type: 'DELETE_RECIPE_FAILURE', payload: error });
       });
   };
 };

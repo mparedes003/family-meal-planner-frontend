@@ -14,6 +14,7 @@ import {
   ADD_RECIPE_START,
   ADD_RECIPE_SUCCESS,
   ADD_RECIPE_FAILURE,
+  DELETE_RECIPE_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -140,6 +141,8 @@ export default (state = initialState, action) => {
         addingRecipe: false,
         success: false,
       };
+    case DELETE_RECIPE_FAILURE:
+      return { ...state, error: action.payload };
     default:
       return state;
   }
