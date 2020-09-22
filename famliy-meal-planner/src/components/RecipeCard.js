@@ -31,6 +31,13 @@ class RecipeCard extends React.Component {
     this.setState({ modalIsOpen: false });
   };
 
+  // sends delete request to server, redirects to user's dashboard
+  handleDelete = (event) => {
+    event.preventDefault();
+    this.props.deleteRecipe(this.id);
+    this.props.history.push('/dashboard');
+  };
+
   render() {
     return (
       <div className='recipe-view-wrapper'>
