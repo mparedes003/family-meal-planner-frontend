@@ -26,6 +26,11 @@ class RecipeCard extends React.Component {
     this.setState({ modalIsOpen: true });
   };
 
+  // deactivates delete modal
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
   render() {
     return (
       <div className='recipe-view-wrapper'>
