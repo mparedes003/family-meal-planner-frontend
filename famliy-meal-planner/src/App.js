@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
 import './App.css';
 
+import LandingPage from './components/LandingPage';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import UserDashboard from './components/UserDashboard';
@@ -57,7 +58,8 @@ class App extends Component {
     return (
       <div className='App'>
         <NavBar />
-        <Route exact path='/' component={LoginForm} />
+        <Route exact path='/' component={LandingPage} />
+        <Route path='/login' component={LoginForm} />
         <Route path='/register' component={SignUpForm} />
         <Route path='/dashboard' component={UserDashboard} />
         <Route
