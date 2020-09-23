@@ -35,7 +35,7 @@ class RecipeCard extends React.Component {
   handleDelete = (event) => {
     event.preventDefault();
     this.props.deleteRecipe(this.id);
-    this.props.history.push('/dashboard');
+    this.props.history.push('/all-recipes');
   };
 
   render() {

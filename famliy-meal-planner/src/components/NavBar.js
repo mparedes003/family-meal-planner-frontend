@@ -9,7 +9,7 @@ const NavBar = () => {
 
   return (
     <div>
-      <NavLink to='/dashboard'>Your Recipies</NavLink>{' '}
+      <NavLink to='/all-recipes'>All Recipies</NavLink>{' '}
       <NavLink to='/recipe/add'>Add Recipe</NavLink>
       <NavLink to='/login'>Log in</NavLink>
       <u onClick={logout}>Log out</u>

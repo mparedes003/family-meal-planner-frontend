@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAllRecipes } from '../store/actions';
 
-class UserDashboard extends React.Component {
+class AllRecipes extends React.Component {
   componentDidMount() {
     this.props.getAllRecipes();
   }
   render() {
     return (
       <div>
-        <h2>Welcome to Your Dashboard</h2>
+        <h2>All Recipes</h2>
         {console.log('this', this.props)}
         {/* maps the existing recipes of a user and 
         lists them one after the other */}
@@ -40,4 +40,4 @@ const mapDispatchToProps = (state) => {
 
 export default connect(mapDispatchToProps, {
   getAllRecipes,
-})(UserDashboard);
+})(AllRecipes);

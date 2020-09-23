@@ -7,7 +7,7 @@ import './App.css';
 import LandingPage from './components/LandingPage';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
-import UserDashboard from './components/UserDashboard';
+import AllRecipes from './components/AllRecipes';
 import RecipeCard from './components/RecipeCard';
 import NavBar from './components/NavBar';
 import RecipeForm from './components/RecipeForm';
@@ -41,7 +41,7 @@ class App extends Component {
     // // console.log('newRecipe data', this.props.history);
     console.log('newRecipe data', newRecipe);
     this.props.addRecipe(newRecipe);
-    this.props.history.push('/dashboard');
+    this.props.history.push('/all-recipes');
   };
 
   render() {
@@ -61,7 +61,7 @@ class App extends Component {
         <Route exact path='/' component={LandingPage} />
         <Route path='/login' component={LoginForm} />
         <Route path='/register' component={SignUpForm} />
-        <Route path='/dashboard' component={UserDashboard} />
+        <Route path='/all-recipes' component={AllRecipes} />
         <Route
           path='/recipes/:id'
           render={(props) => <RecipeCard {...props} />}

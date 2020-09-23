@@ -37,7 +37,7 @@ class LoginForm extends React.Component {
     // if user is logged in
     if (localStorage.getItem('token')) {
       // redirect user to their dashboard
-      return <Redirect to='/dashboard' />;
+      return <Redirect to='/all-recipes' />;
     }
 
     return (

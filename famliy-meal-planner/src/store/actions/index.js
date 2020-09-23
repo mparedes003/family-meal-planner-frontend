@@ -21,7 +21,7 @@ export const signUp = (credentials, history) => (dispatch) => {
       dispatch({ type: SIGN_UP_SUCCESS });
       if (res.data.token) {
         localStorage.setItem('token', res.data.token);
-        history.push('/dashboard');
+        history.push('/all-recipes');
       } else {
         credentials.history.push('/log-in');
       }
@@ -45,7 +45,7 @@ export const logIn = (credentials, history) => (dispatch) => {
     .then((res) => {
       dispatch({ type: LOGIN_SUCCESS });
       localStorage.setItem('token', res.data.token);
-      history.push('/dashboard');
+      history.push('/all-recipes');
       return true;
     })
     .catch((err) => {
