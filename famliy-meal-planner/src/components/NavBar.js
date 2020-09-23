@@ -11,7 +11,7 @@ const NavBar = () => {
     <div>
       <NavLink to='/dashboard'>Your Recipies</NavLink>{' '}
       <NavLink to='/recipe/add'>Add Recipe</NavLink>
-      <NavLink to='/'>Log in</NavLink>
+      <NavLink to='/login'>Log in</NavLink>
       <u onClick={logout}>Log out</u>
     </div>
   );

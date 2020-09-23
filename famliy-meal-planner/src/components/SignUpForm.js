@@ -87,7 +87,7 @@ class SignUpForm extends React.Component {
                 </button>
                 {/* Log in if already an existing member */}
                 <p>
-                  Already a member? Please <Link to='/'>Sign In</Link>
+                  Already a member? Please <Link to='/login'>Sign In</Link>
                 </p>
               </form>
             </div>
