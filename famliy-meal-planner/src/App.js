@@ -11,24 +11,41 @@ import AllRecipes from './components/AllRecipes';
 import RecipeCard from './components/RecipeCard';
 import NavBar from './components/NavBar';
 import RecipeForm from './components/RecipeForm';
-import { addRecipe } from './store/actions';
+import { getAllRecipes, addRecipe } from './store/actions';
+
+import { useHistory } from 'react-router-dom';
 
 class App extends Component {
-  // state = {
-  //   title: '',
-  //   ingredients: [],
-  //   quantity: '',
-  //   measurement: '',
-  //   name: '',
-  //   instructions: [],
-  //   step_number: '',
-  //   description: '',
-  // };
+  state = {
+    filteredRecipes: [],
+    search: '',
+    title: '',
+    ingredients: [],
+    quantity: '',
+    measurement: '',
+    name: '',
+    instructions: [],
+    step_number: '',
+    description: '',
+  };
 
-  // // fetches recipe from server and passes it to store
-  // componentDidMount() {
-  //   this.props.getRecipe(this.id);
-  // }
+  // fetches recipe from server and passes it to store
+  componentDidMount() {
+    this.props.getAllRecipes();
+  }
+
+  // handle the search change check if any of the data includes the search term
+  handleSearchChange = (e) => {
+    this.setState({ search: e.target.value });
+    setTimeout(() => {
+      const recipes = this.props.recipes.filter((recipe) => {
+        return recipe.title
+          .toLowerCase()
+          .includes(this.state.search.toLowerCase());
+      });
+      this.setState({ filteredRecipes: recipes });
+    }, 1);
+  };
 
   handleSubmit = (values) => {
     const newRecipe = {
@@ -41,7 +58,8 @@ class App extends Component {
     // // console.log('newRecipe data', this.props.history);
     console.log('newRecipe data', newRecipe);
     this.props.addRecipe(newRecipe);
-    this.props.history.push('/all-recipes');
+    this.props.history.push('/all-recipes'); // does not reload page
+    // try moving handle submit to RecipeCard
   };
 
   render() {
@@ -57,11 +75,31 @@ class App extends Component {
     // } = this.state;
     return (
       <div className='App'>
-        <NavBar />
+        <NavBar
+          search={this.state.search}
+          handleSearchChange={this.handleSearchChange}
+          recipes={
+            this.state.filteredRecipes.length > 0
+              ? this.state.filteredRecipes
+              : this.props.recipes
+          }
+        />
         <Route exact path='/' component={LandingPage} />
         <Route path='/login' component={LoginForm} />
         <Route path='/register' component={SignUpForm} />
-        <Route path='/all-recipes' component={AllRecipes} />
+        <Route
+          path='/all-recipes'
+          render={(props) => (
+            <AllRecipes
+              recipes={
+                this.state.filteredRecipes.length > 0
+                  ? this.state.filteredRecipes
+                  : this.props.recipes
+              }
+              fetchingRecipes={this.props.fetchingRecipes}
+            />
+          )}
+        />
         <Route
           path='/recipes/:id'
           render={(props) => <RecipeCard {...props} />}
@@ -76,10 +114,14 @@ class App extends Component {
 }
 
 const mapDispatchToProps = (state) => {
+  const { titles, recipes, fetchingRecipes, addingRecipe } = state.rootReducers;
   return {
-    // recipe: state.recipe,
-    // fetchingRecipe: state.fetchingRecipe,
-    addingRecipe: state.rootReducers.addingRecipe,
+    titles: titles.recipes,
+    recipes,
+    fetchingRecipes: fetchingRecipes,
+    addingRecipe: addingRecipe,
   };
 };
-export default withRouter(connect(mapDispatchToProps, { addRecipe })(App));
+export default withRouter(
+  connect(mapDispatchToProps, { getAllRecipes, addRecipe })(App)
+);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = (props) => {
   // logs out a user by removing the token from localStorage
   const logout = () => {
     localStorage.removeItem('token');
@@ -9,10 +9,18 @@ const NavBar = () => {
 
   return (
     <div>
-      <NavLink to='/all-recipes'>All Recipies</NavLink>{' '}
+      <NavLink to='/all-recipes'>All Recipes</NavLink>{' '}
       <NavLink to='/recipe/add'>Add Recipe</NavLink>
       <NavLink to='/login'>Log in</NavLink>
       <u onClick={logout}>Log out</u>
+      <input
+        type='text'
+        name='search'
+        maxLength='20'
+        placeholder='search...'
+        value={props.search}
+        onChange={props.handleSearchChange}
+      />
     </div>
   );
 };
