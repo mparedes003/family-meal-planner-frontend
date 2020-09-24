@@ -25,7 +25,7 @@ const initialState = {
   logginIn: false,
   success: false,
   fetchingTitles: false,
-  currentRecipes: [],
+  recipes: [],
   fetchingRecipe: false,
   addingRecipe: false,
 };
@@ -83,7 +83,7 @@ export default (state = initialState, action) => {
       };
     case FETCH_TITLES_SUCCESS:
       return Object.assign({}, state, {
-        currentRecipes: [...state.currentRecipes, ...action.payload],
+        recipes: [...state.recipes, ...action.payload],
         titles: [...state.titles, ...action.payload], //if our promise was successful, build out the titles array.
         fetchingTitles: false, //also, set our boolean to false, because we're no longer fetching
         success: true,
