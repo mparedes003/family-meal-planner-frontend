@@ -9,7 +9,6 @@ import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import AllRecipes from './components/AllRecipes';
 import RecipeCard from './components/RecipeCard';
-import NavBar from './components/NavBar';
 import RecipeForm from './components/RecipeForm';
 import { getAllRecipes, addRecipe } from './store/actions';
 
@@ -75,15 +74,6 @@ class App extends Component {
     // } = this.state;
     return (
       <div className='App'>
-        <NavBar
-          search={this.state.search}
-          handleSearchChange={this.handleSearchChange}
-          recipes={
-            this.state.filteredRecipes.length > 0
-              ? this.state.filteredRecipes
-              : this.props.recipes
-          }
-        />
         <Route exact path='/' component={LandingPage} />
         <Route path='/login' component={LoginForm} />
         <Route path='/register' component={SignUpForm} />
