@@ -1,4 +1,6 @@
 import React from 'react';
+import LoginForm from './LoginForm';
+import './LandingPage.css'
 // import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 // import { getAllRecipes } from '../store/actions';
@@ -6,9 +8,18 @@ import React from 'react';
 class LandingPage extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Family Meal Planner</h1>
-        <h2>Landing Page</h2>
+      <div className='landing-page'>
+        <div className='landing-page-background'>
+          <div className='landing-page-header'>
+            <div className='landing-welcome'>
+              <h2>Welcome to</h2>
+            </div>
+            <div className='landing-site-name'>
+              <h1>Mommy's Kitchen</h1>
+            </div>
+            <LoginForm />
+          </div>
+        </div>
       </div>
     );
   }

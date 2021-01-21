@@ -46,7 +46,9 @@ class LoginForm extends React.Component {
           <h2>Loading</h2>
         ) : (
           <form onSubmit={this.logIn}>
-            <h3>Kindly login for further access</h3>
+            <h3>Already have an account? Login</h3>
+            <br/>
+            <br/>
             <p>Username</p>
             <input
               type='text'
@@ -55,6 +57,8 @@ class LoginForm extends React.Component {
               onChange={this.changeHandler}
               value={this.input}
             />
+            <br/>
+            <br/>
             <p>Passsword</p>
             <input
               type='text'
