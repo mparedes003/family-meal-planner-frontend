@@ -29,6 +29,10 @@ h1 {
     font-size: 3.2rem;
     font-family: sans-serif;
 }
+/* .landing-logo {
+    width: 80%;
+    height: auto;
+} */
 
 h2 {
     font-size: 2.6rem;
@@ -38,6 +42,7 @@ h2 {
 h3 {
     font-size: 1.6rem;
     font-family: sans-serif;
+    font-weight: 600;
 }
 
 p {
@@ -47,9 +52,9 @@ p {
 
 .landing-welcome {
     margin-top: 10rem;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
 }
 
-.landing-site-name {
+/* .landing-site-name {
     margin-bottom: 3rem;
-}
+} */
